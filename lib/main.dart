@@ -26,7 +26,7 @@ class _BooksAppState extends State<BooksApp> {
   BookRouterDelegate _routerDelegate = BookRouterDelegate();
   BookRouteInformationParser _routeInformationParser = BookRouteInformationParser();
   // New:
-  Book? _selectedBook;
+  // Book? _selectedBook;
   bool show404 = false;
   List<Book> books = [
     Book('Left Hand of Darkness', 'Ursula K. Le Guin'),
@@ -41,11 +41,11 @@ class _BooksAppState extends State<BooksApp> {
 
   @override
   Widget build(BuildContext context) {
-    void _handleBookTapped(Book book) {
-      setState(() {
-        _selectedBook = book;
-      });
-    }
+    // void _handleBookTapped(Book book) {
+    //   setState(() {
+    //     _selectedBook = book;
+    //   });
+    // }
 
     return MaterialApp.router(
       title: 'Books App',
@@ -118,7 +118,13 @@ class BookRouterDelegate extends RouterDelegate<BookRoutePath> with ChangeNotifi
             onTapped: _handleBookTapped,
           ),
         ),
-        if (show404) const MaterialPage(key: ValueKey('UnknownPage'), child: UnknownScreen()) else if (_selectedBook != null) BookDetailsPage(book: _selectedBook)
+        if (show404)
+          const MaterialPage(
+            key: ValueKey('UnknownPage'),
+            child: UnknownScreen(),
+          )
+        else if (_selectedBook != null)
+          BookDetailsPage(book: _selectedBook)
       ],
       onPopPage: (route, result) {
         if (!route.didPop(result)) {
